@@ -1,9 +1,11 @@
 #include "colors.inc"
 #include "textures.inc"   
 #include "mantis.inc"
+#include "functions.inc"
+#include "slicedrobot.inc"
 
 //environment
-sky_sphere {pigment {rgb <0.159,0.210,0.131>}}
+sky_sphere {pigment {rgb <0.130,0.135,0.15>}}
 
 #local p_start		=	64/image_width;
 #local p_end_tune	=	8/image_width;
@@ -35,29 +37,43 @@ radiosity
     }
 }
 */
-  
+#declare movingcam=  
 camera {
         perspective
-        location <0,10,-10>
+        location <5*cos(clock*pi*2),9+0.5*sin(clock*pi*2),5*sin(clock*pi*2)>
         right    x*image_width/image_height
         angle 100
-        look_at <0,4,0>
+        look_at <0,5,0>
           focal_point <0,0,0> blur_samples 200 aperture 0.1
 }
-/*        
-light_source {<0,100,63> White*0.7
+
+#declare staticcam=  
+camera {
+        perspective
+        location <0,10,4>
+        right    x*image_width/image_height
+        angle 100
+        look_at <0,9,0>
+          focal_point <0,0,0> blur_samples 200 aperture 0.1
+}
+
+//camera
+camera {movingcam}
+       
+light_source {<0,20,63> White*0.7
 fade_distance 100
-fade_power 1}
+fade_power 5}
 light_source {<0,100,50> Blue*0.3
 fade_distance 100
-fade_power 1}
-*/
+fade_power 3}
+
 
 //light_source {<12,0,10> Yellow*1
 //fade_distance 5
 //fade_power 1}                 
 
 //floor
+/*
 box
 {
  <-100,-5,-100>,
@@ -65,10 +81,10 @@ box
 pigment {checker Gray, Red scale 2}
 finish {
 	reflection {.1}
-	ambient 0.1
+	emission 0.1
 	diffuse 0.7 } 
 
-}
+}*/
 
 //start
 
@@ -81,23 +97,56 @@ box
  finish { ambient 0.2 diffuse 0.5 }
 translate <0,-1,0> }
 */
-//mantis bot
+//mantis------------
+/*
+//head of the forbidden one
 object { mantisHead }
 
 //torso
 object {torso}
 
-//leg left
+//leg left of the forbidden one
 
 object {leftleg}
-
+//right left of the forbidden one
 object {rightleg}
-
-//left arm
+//left arm of the forbidden one
 object {leftarm}
+//right arm of the forbidden one
+object {rightarm}
 
-//right arm
-object {rightarm
-rotate <0,0,0>}
+//end of mantis----------------------
+*/
 
+//object {slicedrobot}
 
+//road
+
+box
+{
+ <-100,-5,-100>,
+<100,-6,100>
+pigment {Gray}
+finish {
+	reflection {.1}
+	emission 0.1
+	diffuse 0.7
+	specular 0.5
+	subsurface {translucency White}
+	}
+	normal {bumps scale 0.3 turbulence 0.1 }
+}
+
+//lamppost
+box
+{
+    <1,1,1>
+    <-1,-1,-1>
+    texture
+    {
+        pigment {Gray}
+        
+    }
+    scale <1,10,1>
+    translate<0,5,0>
+}

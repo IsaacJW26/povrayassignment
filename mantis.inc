@@ -1,25 +1,33 @@
 //mantis bot
-
+#declare metaltexture=
+texture
+{
+    //Chrome_Metal
+    pigment {Gray}
+    normal {pigment_pattern {cells} scale 0.5
+    turbulence 0
+    translate <0,5+sin(clock*pi*2)*5,0>}
+}
 //mantis eye
 #declare eye=
 union
 {
-sphere
-{
-    <0,1,0> 1
-    pigment { Red filter 0.5 }
-    finish { emission 0.2 diffuse 0.1 phong 0.8 reflection 0.3}
-    interior { ior 1.5 }
-    
-}
-sphere
-{
-    <0,1,0> 0.8
-    pigment { Red filter 0.1 }
-    finish { emission 0.9 diffuse 0.1 phong 0.2 reflection 0.1}
-    interior { ior 1.5 }
-    
-}
+    sphere
+    {
+        <0,1,0> 1
+        pigment { Red filter 0.5 }
+        finish { emission 0.2 diffuse 0.1 phong 0.8 reflection 0.3}
+        texture {Glass}
+        interior { ior 1.5 }
+        
+    }
+    sphere
+    {
+        <0,1,0> 0.8
+        pigment { Red filter 0.1 }
+        finish { emission 0.9 diffuse 0.1 phong 0.2 reflection 0.1}
+        interior { ior 1.5 }
+    }
 }
 
 //mantis head
@@ -31,10 +39,10 @@ merge
     
             box
             {
-               <2,1.5,2>,
-               <-2,-0.5,-2>
-               pigment {Gray}
-               finish { emission 0.2 diffuse 0.5 }
+                <2,1.5,2>,
+                <-2,-0.5,-2>
+                
+                texture {metaltexture}
                 rotate <0, 45, 0>
                 translate <0,0,0> 
             }
@@ -42,8 +50,9 @@ merge
             {
                 <3,4,3>,
                 <-3,-2,-3>
-                pigment {Gray}
-                finish { emission 0.2 diffuse 0.5 }
+
+                texture {metaltexture}
+
                 translate <0,0,-3>
             }
     }
@@ -56,8 +65,7 @@ merge
     {
         <0.5,0,0.5>,
        <-0.5,-3,-0.5>
-       pigment {Gray}
-       finish { ambient 0.2 diffuse 0.5 }
+       texture {metaltexture}
         rotate <0, 0, 0>
         translate <0,0,1> 
     }
@@ -73,8 +81,7 @@ union
     {
         <1,2,1>,
         <-1,-1,-1>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         translate <0,0.5,0>
         rotate <10,0,0>
     }
@@ -83,8 +90,7 @@ union
     {
         <1,2,1>,
         <-1,-1,-1>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         translate <0,-3,0>
             rotate <-10,0,0>
     }
@@ -98,8 +104,7 @@ union
     {
         <0.5,2,0.5>,
         <-0.5,-1,-0.5>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         translate <0,0.5,0>
         rotate <-10,0,0>
     }
@@ -108,8 +113,7 @@ union
     {
         <0.5,2,0.5>,
         <-0.5,-3,-0.5>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         translate <0,-3,0>
             rotate <10,0,0>
     }
@@ -157,8 +161,7 @@ union
     {
         <0.5,2,0.5>,
         <-0.5,-3,-0.5>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }    
+        texture {metaltexture}  
         scale<0.7,1,0.7>
         rotate <10,0,0>
         translate <0,0,1>
@@ -169,7 +172,7 @@ union
 
 }
 
-
+/*
 #declare leftarm=
 union
 {
@@ -177,8 +180,7 @@ union
     {
         <0.5,2,0.5>,
         <-0.5,-3,-0.5>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         scale<0.7,1,0.7>
         translate <0,0.5,0>
         rotate <-10,0,0>
@@ -189,7 +191,7 @@ union
     rotate <-20, -20, 0>
     translate <-2,6,2>
 }
-
+*/
 #declare rightarm=
 union
 {
@@ -197,8 +199,7 @@ union
     {
         <0.5,2,0.5>,
         <-0.5,-3,-0.5>
-        pigment {Gray}
-        finish { emission 0.1 diffuse 0.7 }
+        texture {metaltexture}
         scale<0.7,1,0.7>
         translate <0,0.5,0>
         rotate <-10,0,0>
