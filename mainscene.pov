@@ -3,6 +3,7 @@
 #include "mantis.inc"
 #include "functions.inc"
 #include "slicedrobot.inc"
+#include "lamppost.inc"
 
 //environment
 sky_sphere {pigment {rgb <0.130,0.135,0.15>}}
@@ -50,22 +51,22 @@ camera {
 #declare staticcam=  
 camera {
         perspective
-        location <0,10,4>
+        location <5,10,5>
         right    x*image_width/image_height
         angle 100
-        look_at <0,9,0>
+        look_at <0,8,0>
           focal_point <0,0,0> blur_samples 200 aperture 0.1
 }
 
 //camera
-camera {movingcam}
+camera {staticcam}
        
 light_source {<0,20,63> White*0.7
 fade_distance 100
-fade_power 5}
+fade_power 2}
 light_source {<0,100,50> Blue*0.3
 fade_distance 100
-fade_power 3}
+fade_power 2}
 
 
 //light_source {<12,0,10> Yellow*1
@@ -126,27 +127,19 @@ box
 {
  <-100,-5,-100>,
 <100,-6,100>
-pigment {Gray}
+pigment {Gray*0.3}
 finish {
-	reflection {.1}
-	emission 0.1
-	diffuse 0.7
-	specular 0.5
+	reflection {.2}
+	emission 0.05
+	diffuse 0.5
+	specular 0.2
 	subsurface {translucency White}
 	}
 	normal {bumps scale 0.3 turbulence 0.1 }
 }
 
 //lamppost
-box
-{
-    <1,1,1>
-    <-1,-1,-1>
-    texture
-    {
-        pigment {Gray}
-        
-    }
-    scale <1,10,1>
-    translate<0,5,0>
+object{lamppost
+translate<-10,0,-10>
 }
+object{slicedrobot}

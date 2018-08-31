@@ -78,7 +78,14 @@ union
     }
     
     
-    texture {Aluminum normal {bumps scale 0.01}}
+    texture
+    {
+        Aluminum normal {bumps scale 0.05}
+        finish
+        {
+            reflection { 0.8 }
+        }
+    }
 
 }
 
