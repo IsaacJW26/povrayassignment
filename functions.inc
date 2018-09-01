@@ -1,5 +1,9 @@
 #macro sinNormal(X)
- 0.5+(sin(X*pi*2)*0.5)
+ (0.5+(sin(X*pi*2)*0.5))
+#end
+
+#macro cosNormal(X)
+ (0.5+(cos(X*pi*2)*0.5))
 #end
 
 #macro accelDeccel(X)

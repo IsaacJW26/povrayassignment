@@ -68,7 +68,7 @@ union
             <-1,-1,-1>
             
             scale<0.6,0.2,1>
-            translate<0,-2,2>
+            translate<0,-2,1.8>
             texture
             {
                 pigment {Cyan}
@@ -80,19 +80,22 @@ union
     
     texture
     {
-        Aluminum normal {bumps scale 0.05}
+        Aluminum
+        //normal {bumps 0.5 scale 0.001}
         finish
         {
-            reflection { 0.8 }
+            emission 0.05
+            brilliance 2.5
+            diffuse 0.8
+            reflection { 0.05 }
         }
     }
-
 }
 
 
 #declare slicevalue = 0;
 #declare movevalue =0;
-#declare transitionStart = 0.2;
+#declare transitionStart = 0.15;
 #if(clock < transitionStart)
     #declare slicevalue = clock*2;
 #else
@@ -114,10 +117,14 @@ union
     
                 texture
                 {
-                    pigment {Orange}
-                    finish {
-                    emission (2 * sinNormal((clock*2.2)-8))
-                    specular 0.5}
+                    pigment {Orange*0.95+White*0.05}
+                    finish
+                    {
+                        diffuse 0.1
+                        //emission (2 * sinNormal((clock*2.2)-8))
+                        emission 1.5*(1-clock)
+                        specular 0.5
+                    }
                 }
                 
                 scale<slicevalue*10,10,10>
@@ -126,7 +133,7 @@ union
                 translate<-2,-2.9,0>
         }
         
-        translate<0,10+accelDeccel(movevalue),0>
+        translate<0,10+accelDeccel(movevalue)*4,0>
         rotate<-10,-accelDeccel(movevalue)*20,accelDeccel(movevalue)*5>
     }
     
@@ -141,10 +148,12 @@ union
     
                 texture
                 {
-                    pigment {Orange }
+                    pigment {Orange*0.95+White*0.05}
                     normal { pigment_pattern {cells scale 0.3}}
                     finish {
-                    emission (2 * sinNormal((clock*1.6)+5))
+                    diffuse 0.1
+                    //emission (2 * sinNormal((clock*1.6)+5))
+                    emission 1.5*(1-clock)
                     specular 0.5
                     }
                 }
@@ -155,7 +164,7 @@ union
                 translate<-2,-3.1,0>
         }
         
-        translate<0,10-accelDeccel(movevalue)*2,0>
+        translate<0,10-accelDeccel(movevalue)*8,0>
         rotate<-10,accelDeccel(movevalue)*20,-accelDeccel(movevalue)*5>
     }
 }
