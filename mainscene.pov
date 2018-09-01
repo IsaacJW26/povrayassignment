@@ -141,20 +141,19 @@ sphere
                       specular 0.1
                       reflection 0.6}
               }// end of texture
-              interior { ior 1.33
-              caustics 0.5}
+              interior { ior 1.33 }
 }
 
 #declare Rnd_2 = seed (1902);
 #declare maxy=50;
 #declare miny=-5;
 
-#declare maxhoriz=25;
-#declare minhoriz=-25;
+#declare maxhoriz=20;
+#declare minhoriz=-20;
 
 //all rain
 
-#for(index, 0, 100000,1)
+#for(index, 0, 10000,1)
     object
     {
         raindrop
