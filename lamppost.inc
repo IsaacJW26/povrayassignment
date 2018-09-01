@@ -51,7 +51,7 @@ union
         
         light_source
         {
-            <0,-1,0>,Blue *0.5+White*0.5
+            <0,-1,0>,Blue *0.4+White*0.4
             fade_distance 30
             fade_power 2
             looks_like 
@@ -135,7 +135,7 @@ union
         finish
         {
         	reflection {.001}
-        	emission 0.05
+        	emission 0.0
         	diffuse 0.8
         	specular 0.01
         	subsurface {translucency White *0.01}
@@ -150,7 +150,7 @@ union
     pigment {Gray*0.01}
     finish {
     	reflection {.004}
-    	emission 0.05
+    	emission 0.0
     	diffuse 0.8
     	specular 0.35
     	subsurface {translucency White *0.01}
@@ -167,7 +167,7 @@ union
         finish
         {
         	reflection {.001}
-        	emission 0.05
+        	emission 0.0
         	diffuse 0.8
         	specular 0.01
         	subsurface {translucency White *0.01}
@@ -338,7 +338,7 @@ union
                     pigment {
                         brick
                     pigment {Gray}
-                    pigment {Gray*0.1*rand(Rnd_1)}
+                    pigment {Gray*0.25*rand(Rnd_1)}
                     
                     mortar 0.1
                        } //---- end of pigment ------

@@ -18,7 +18,9 @@ sky_sphere {pigment {rgb <0.0,0.0035,0.0114>}}
 #local final_eb		=	0.1875;
 #local final_count	=	smooth_count * smooth_eb * smooth_eb / (final_eb * final_eb);
 
-global_settings{
+global_settings
+{
+
     radiosity
     {
     pretrace_start p_start        // Use p_end_final for the pretrace_end value
@@ -38,6 +40,7 @@ global_settings{
     
     normal on
     }
+    
 }
 
 fog
@@ -73,17 +76,19 @@ fog
 camera
 {
         perspective
-        location <1,2,7-6*movevalue>
+        location <-0.5+sinNormal(movevalue+2.4)*1.5,
+        1.5+sinNormal(-movevalue)*0.8,
+        8-6*movevalue>
         right    x*image_width/image_height
         angle 100
         look_at <0,2,3-6*movevalue>
-        focal_point <0,2,4-5*movevalue> blur_samples 200 aperture 0.25
+        focal_point <0,2,4-5*movevalue> blur_samples 400 aperture 0.25
 }
 
 #declare staticcam=  
 camera {
         perspective
-        location <-0,1,5>
+        location <-0,2,5>
         right    x*image_width/image_height
         angle 100
         look_at <0,1,-1>
@@ -94,19 +99,20 @@ camera {
 //camera
 camera {movingcam}
 
+//skysphere
 difference
 {
     sphere
     {
-       <0,0,0>, 10000
+       <0,0,0>, 100000
     }
     
     sphere
     {
-       <0,0,0>, 10000-1
+       <0,0,0>, 100000-1
     }
     
-    pigment {rgb <0.0,0.0035,0.0114>}
+    pigment {rgb <0.0001,0.0015,0.00228>}
     finish
     {
         emission 1.0
@@ -114,16 +120,67 @@ difference
     }
 }
 
-
-object {mantis
-scale<0.5,0.5,0.5>
-translate<0,-3,-1>}
-
-object
-{
-    slicedrobot
-    translate <1,-7,5.5>
-}
+//mantis
+object {mantis scale<0.5,0.5,0.5> translate<0,-3+sinNormal(clock*4)*0.1,-1>}
+//sliced robot
+object { slicedrobot translate <0.5,-7,5.5> }
 
 
 object{road}
+
+//raindrop
+#declare raindrop=
+sphere
+{
+    <0,0,0>, 0.01
+    scale <1,10,1>
+    texture{pigment {color rgb <.2,.2,.2> transmit 0.7}
+              finish {emission 0
+                      diffuse 0.55
+                      brilliance 6.0
+                      phong 0.8
+                      phong_size 120
+                      specular 0.1
+                      reflection 0.6}
+              }// end of texture
+              interior { ior 1.33
+              caustics 0.5}
+}
+
+#declare Rnd_2 = seed (1902);
+#declare maxy=50;
+#declare miny=-5;
+
+#declare maxhoriz=25;
+#declare minhoriz=-25;
+
+//all rain
+
+#for(index, 0, 100000,1)
+    object
+    {
+        raindrop
+        translate<(maxhoriz-minhoriz)*rand(Rnd_2)+minhoriz,
+        (maxy-miny)*rand(Rnd_2)+miny,
+        (maxhoriz-minhoriz)*rand(Rnd_2)+minhoriz>
+        translate<0,
+        mod(((maxy-miny)*rand(Rnd_2)+miny)-(30*clock),maxy)
+        ,0>
+    }
+#end
+
+
+/*
+ box
+ {
+    <-10, -2, -50>, <50, 6, 10>
+    pigment { rgbt 1 } hollow
+   interior
+   { media
+     { scattering { 4, 0.001 extinction 0.01 }
+       samples 60,1000
+     }
+   }
+
+ }
+*/

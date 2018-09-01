@@ -297,10 +297,5 @@ union
         rotate <0,0,0>
     }
     
-    sphere
-    {
-        <0,0,0>,0.5
-        pigment { Cyan }
-    }
     //end of mantis-
 }
