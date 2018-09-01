@@ -33,12 +33,10 @@ global_settings
     error_bound final_eb         //  from what we determined before, defined above
                                  //   halfway between 0.25 and 0.5
 
-    recursion_limit 4          // Recursion should be near what you want it to be
+    recursion_limit 3          // Recursion should be near what you want it to be
                                  //  If you aren't sure, start with 3 or 4
 
     minimum_reuse 0.005          // Use a lower minimum reuse
-    
-    normal on
     }
     
 }
@@ -82,7 +80,7 @@ camera
         right    x*image_width/image_height
         angle 100
         look_at <0,2,3-6*movevalue>
-        focal_point <0,2,4-5*movevalue> blur_samples 400 aperture 0.25
+        focal_point <0,2,4-5*movevalue> blur_samples 200 aperture 0.25
 }
 
 #declare staticcam=  
